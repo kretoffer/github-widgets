@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
+from api import api_roter
+
+
 app = FastAPI()
 
-
-@app.get("/")
-async def root():
-    return "Hello world"
+app.include_router(api_roter)
 
 
 def main():
