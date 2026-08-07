@@ -11,6 +11,8 @@ dependencies = [
     "aiohttp>=3.14.3",
     "fastapi>=0.141.1",
     "jinja2>=3.1.6",
+    "pydantic-extra-types>=2.11.1",
+    "pydantic-settings>=2.15.0",
     "uvicorn>=0.52.1",
 ]
 
@@ -24,3 +26,34 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 py-modules = ["main"]
 package-dir = {"" = "src"}
+
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+extend-exclude = ["tests/audit_p0", ".opencode"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["N999", "N801", "N813"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.pyright]
+include = ["src", "tests", "examples"]
+exclude = ["build", "**/__pycache__", "tests/audit_p0", ".venv", ".ruff_cache", ".git", ".opencode"]
+typeCheckingMode = "basic"
+venvPath = "."
+venv = ".venv"
+reportMissingImports = "warning"
+reportMissingTypeStubs = "warning"
+reportPrivateUsage = "warning"
+reportAttributeAccessIssue = "warning"
+reportInvalidTypeForm = "warning"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+    "pytest>=9.1.1",
+    "ruff>=0.16.1",
+]
