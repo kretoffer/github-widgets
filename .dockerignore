@@ -1,0 +1,51 @@
+# Local virtual environments and uv dependencies
+
+.venv
+.uv
+**pycache**
+*.pyc
+*.pyo
+*.pyd 
+
+# Environment variables and config files
+
+.env
+.env.*
+.python-version 
+
+# IDE and editor settings
+
+.vscode
+.idea
+*.swp
+*.swo 
+
+# Version control and Docker files
+
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose*.yml 
+
+# Testing, linting, and coverage cache
+
+tests
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.coverage
+htmlcov
+.tox 
+
+# Documentation and logs
+
+docs
+logs
+*.log 
+
+# Build artifacts
+
+dist
+build
+*.egg-info
