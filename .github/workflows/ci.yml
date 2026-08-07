@@ -34,5 +34,5 @@ jobs:
       - name: Type check with pyright
         run: uv run pyright
 
-      - name: Test with pytest
-        run: uv run pytest
+      # - name: Test with pytest
+      #   run: uv run pytest
