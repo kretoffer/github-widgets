@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: transparent;
+            padding: 0;
+            border: 2px solid #A0A0A0;
+            width: min-content;
+            padding: 0px 5px 5px 5px;
+            border-radius: 20px;
+            margin: 10px;
+        }
+        
+        .issues-list {
+            width: min-content;
+            min-width: 400px;
+            max-width: 800px;
+        }
+        
+        .issue-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .issue {
+            padding: 5px 8px;
+            transition: background-color 0.2s;
+            margin: 4px;
+            border-radius: 14px;
+            border: 2.5px solid #A0A0A0;
+        }
+        
+        .issue:hover {
+            background-color: #A0A0A020;
+        }
+        
+        .issue-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .status-icon {
+            height: 16px;
+            border-radius: 10px;
+            padding: 5px 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .status-open {
+            background-color: #28a745;
+        }
+        
+        .status-closed {
+            background-color: #cb2431;
+        }
+        
+        .issue-number {
+            font-size: 15px;
+            font-weight: 600;
+            color: #A0A0A0;
+        }
+        
+        .issue-title {
+            font-size: 16px;
+            color: #A0A0A0;
+            line-height: 1.4;
+        }
+        
+        .labels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .label {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .widget-header {
+            color: #A0A0A0;
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="issues-list">
+        <div class="widget-header">
+            {{ header_text }}
+        </div>
+        {% for issue in issues %}
+        <a href="{{ issue.url }}" 
+           class="issue-link" target="_parent">
+            <div class="issue">
+                <div class="issue-header">
+                    <div class="status-icon {% if issue.state == 'open' %}status-open{% else %}status-closed{% endif %}">
+                        {% if issue.state == "open" %}open{% else %}close{% endif %}
+                    </div>
+                    <span class="issue-number">#{{ issue.number }}</span>
+                    <div class="issue-title">
+                        {{ issue.title }}
+                    </div>
+                </div>
+                
+                {% if issue.labels %}
+                <div class="labels">
+                    {% for label in issue.labels %}
+                    <span class="label" 
+                          style="color: {{ label.color|color_hex }}; border: 2px solid {{ label.color|color_hex }}; background-color: {{ label.color|color_hex }}40;">
+                        {{ label.name }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

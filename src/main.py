@@ -2,7 +2,6 @@ from fastapi import FastAPI
 
 from api import api_roter
 
-
 app = FastAPI()
 
 app.include_router(api_roter)
