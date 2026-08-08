@@ -1,6 +1,6 @@
 [project]
 name = "github-widgets"
-version = "0.1.0"
+version = "0.0.1"
 description = "Dynamic SVG roadmap widget for GitHub issues. Sorted by status and priority. Embed in any README"
 readme = "README.md"
 authors = [
