@@ -1,22 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="{{ width }}" height="{{ height }}" viewBox="0 0 {{ width }} {{ height }}">
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml">
-      <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        .issues-list {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            width: {{ content_width }}px;
-            background-color: {{ bg_color }};
-            border: 2px solid {{ border_color }};
-            padding: 0px 10px 10px 10px;
-            border-radius: 20px;
-        }
-        
+<style>
         .issue {
             padding: 5px 8px;
             margin: 4px;
@@ -76,46 +58,28 @@
             font-weight: 600;
             white-space: nowrap;
         }
-
-        .widget-header {
-            color: {{ primary_color }};
-            font-size: 28px;
-            font-weight: 600;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px;
-        }
       </style>
-      <div class="issues-list">
-        <div class="widget-header">
-            {{ header_text }}
-        </div>
-        {% for issue in issues %}
-        <div class="issue">
-            <div class="issue-header">
-                <div class="status-icon {% if issue.state == 'open' %}status-open{% else %}status-closed{% endif %}">
-                    {% if issue.state == "open" %}open{% else %}close{% endif %}
-                </div>
-                <span class="issue-number">#{{ issue.number }}</span>
-                <div class="issue-title">
-                    {{ issue.title }}
-                </div>
-            </div>
-            
-            {% if issue.labels %}
-            <div class="labels">
-                {% for label in issue.labels %}
-                <span class="label" 
-                      style="color: {{ label.color|color_hex }}; border: 2px solid {{ label.color|color_hex }}; background-color: {{ label.color|color_hex }}40;">
-                    {{ label.name }}
-                </span>
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-        {% endfor %}
+      {% for issue in issues %}
+      <div class="issue">
+          <div class="issue-header">
+              <div class="status-icon {% if issue.state == 'open' %}status-open{% else %}status-closed{% endif %}">
+                  {% if issue.state == "open" %}open{% else %}close{% endif %}
+              </div>
+              <span class="issue-number">#{{ issue.number }}</span>
+              <div class="issue-title">
+                  {{ issue.title }}
+              </div>
+          </div>
+          
+          {% if issue.labels %}
+          <div class="labels">
+              {% for label in issue.labels %}
+              <span class="label" 
+                    style="color: {{ label.color|color_hex }}; border: 2px solid {{ label.color|color_hex }}; background-color: {{ label.color|color_hex }}40;">
+                  {{ label.name }}
+              </span>
+              {% endfor %}
+          </div>
+          {% endif %}
       </div>
-    </div>
-  </foreignObject>
-</svg>
+      {% endfor %}

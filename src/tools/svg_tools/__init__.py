@@ -9,6 +9,8 @@ TEMPLATES_DIR = str(Path(__file__).resolve().parent.parent.parent / "templates" 
 
 
 class SVGRenderer:
+    BASE_TEMPLATE = "base"
+
     def __init__(self, templates_dir: str = TEMPLATES_DIR):
         self.env = Environment(
             loader=FileSystemLoader(templates_dir),
@@ -25,8 +27,9 @@ class SVGRenderer:
         return color.as_hex()
 
     def render(self, template_name: str, **context) -> str:
-        template = self.env.get_template(f"{template_name}.svg")
-        return template.render(**context)
+        widget = self.env.get_template(f"{template_name}.svg").render(**context)
+        base = self.env.get_template(f"{self.BASE_TEMPLATE}.svg")
+        return base.render(widget_content=widget, **context)
 
     def response(self, template_name: str, **context) -> Response:
         element = self.render(template_name, **context)
