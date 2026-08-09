@@ -1,14 +1,14 @@
 import html
 from pathlib import Path
 
-from fastapi.responses import HTMLResponse
+from fastapi.responses import Response
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pydantic_extra_types import Color
 
-TEMPLATES_DIR = str(Path(__file__).resolve().parent.parent.parent / "templates" / "html")
+TEMPLATES_DIR = str(Path(__file__).resolve().parent.parent.parent / "templates" / "svg")
 
 
-class HTMLRenderer:
+class SVGRenderer:
     def __init__(self, templates_dir: str = TEMPLATES_DIR):
         self.env = Environment(
             loader=FileSystemLoader(templates_dir),
@@ -25,12 +25,16 @@ class HTMLRenderer:
         return color.as_hex()
 
     def render(self, template_name: str, **context) -> str:
-        template = self.env.get_template(f"{template_name}.html")
+        template = self.env.get_template(f"{template_name}.svg")
         return template.render(**context)
 
-    def response(self, template_name: str, **context) -> HTMLResponse:
+    def response(self, template_name: str, **context) -> Response:
         element = self.render(template_name, **context)
-        return HTMLResponse(content=element, headers={"Cache-Control": "public, max-age=3600"})
+        return Response(
+            content=element,
+            media_type="image/svg+xml",
+            headers={"Cache-Control": "public, max-age=3600"},
+        )
 
 
-renderer = HTMLRenderer()
+renderer = SVGRenderer()
