@@ -27,6 +27,7 @@ A roadmap card generated from repository issues, with status badges (open/closed
 | `width`         | `700`     | Card width in px, `300` – `1600`     |
 | `primary-color` | `#A0A0A0` | Primary color of widget              |
 | `bg-color`      | `transparent` | Widget background color          |
+| `border-color`  | `transparent` | Widget border color              |
 
 ![Issues Roadmap](https://github-widgets.kretoffer.com/api/issues-list/kretoffer/github-widgets?count=2&header-text=My%20Roadmap&width=500&primary-color=%23000000&bg-color=%23A0A0A0)
 

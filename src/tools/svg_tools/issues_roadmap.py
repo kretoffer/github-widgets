@@ -3,9 +3,8 @@ import math
 from fastapi.responses import Response
 
 from schemas.external.gh import Issue
+from schemas.widgets import WidgetStyleParams
 from tools.svg_tools import renderer
-
-DEFAULT_WIDTH = 700
 
 _CHAR_WIDTH = 8
 _TITLE_LINE_HEIGHT = 22
@@ -53,20 +52,17 @@ def generate_issues_roadmap_resp(
     issues: list[Issue],
     template_name: str = "issues_roadmap",
     header_text: str = "Roadmap",
-    width: int = DEFAULT_WIDTH,
-    primary_color="#A0A0A0",
-    bg_color="transparent",
+    style: WidgetStyleParams | None = None,
 ) -> Response:
+    style = style or WidgetStyleParams()
     issues_data = [issue.model_dump() for issue in issues]
-    height = estimate_height(issues_data, width)
+    height = estimate_height(issues_data, style.width)
 
     return renderer.response(
         template_name,
         issues=issues_data,
         header_text=header_text,
-        width=width,
         height=height,
-        content_width=width - 20,
-        primary_color=primary_color,
-        bg_color=bg_color,
+        **style.model_dump(),
+        content_width=style.content_width,
     )
