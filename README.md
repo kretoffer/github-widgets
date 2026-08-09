@@ -1,6 +1,30 @@
-# github-widgets
+<div align="center">
+  <a href="https://github.com/kretoffer/github-widgets">
+    <img src="./docs/github-widgets-by-kretoffer.svg" alt="Logo" width="180" height="180">
+  </a>
 
-Dynamic SVG widgets for GitHub, ready to embed into your README.
+  <h2 align="center">GitHub widgets by Kretoffer</h2>
+
+  <p align="center">
+    Dynamic SVG widgets for GitHub, ready to embed into your README
+    <br />
+    <a href="https://github.com/kretoffer/github-widgets/tree/main/docs"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/kretoffer/github-widgets/issues/new?labels=bug&template=BUG-REPORT.yml">Report Bug</a>
+    &middot;
+    <a href="https://github.com/kretoffer/github-widgets/issues/new?labels=enhancement&template=FEATURE-REQUEST.yml">Request Feature</a>
+    <br>
+    <br>
+        <a href="https://github.com/kretoffer/github-widgets/actions"><img src="https://img.shields.io/github/actions/workflow/status/kretoffer/github-widgets/ci.yml?style=for-the-badge&logo=github&label=tests&color=8A2BE2" alt="Tests"></a>
+        <a href="https://github.com/kretoffer/github-widgets/actions"><img src="https://img.shields.io/github/actions/workflow/status/kretoffer/github-widgets/cd.yml?style=for-the-badge&logo=github&label=deploy&color=8A2BE2" alt="Deploy"></a>
+        <a href="https://github-widgets.kretoffer.com"><img src="https://img.shields.io/badge/github--widgets.kretoffer.com-orange?style=for-the-badge" alt="github-widgets.kretoffer.com"></a>
+        <a href="https://github.com/kretoffer/github-widgets/stargazers"><img src="https://img.shields.io/github/stars/kretoffer/github-widgets?style=for-the-badge&logo=githubsponsors&logoColor=FFFFFF&label=stars&color=FFD700" alt="Stars"></a>
+        <a href="https://github.com/kretoffer/github-widgets/issues"><img src="https://img.shields.io/github/issues/kretoffer/github-widgets?style=for-the-badge&logo=openbugbounty&logoColor=FFFFFF&label=issues&color=FF6B6B" alt="Issues"></a>
+        <a href="LICENSE"><img src="https://img.shields.io/github/license/kretoffer/github-widgets?style=for-the-badge&logo=libreoffice" alt="LICENSE"></a>
+  </p>
+</div>
+
 
 ## Quick Start
 
