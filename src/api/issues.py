@@ -14,6 +14,10 @@ async def get_issues_list(
     count: int = 20,
     header_text: str = Query("Roadmap", alias="header-text"),
     width: int = Query(DEFAULT_WIDTH, ge=300, le=1600),
+    primary_color=Query("#A0A0A0", alias="primary-color"),
+    bg_color=Query("transparent", alias="bg-color"),
 ) -> Response:
     issueses = await get_gh_issues_list(username, repo, count)
-    return generate_issues_roadmap_resp(issueses, header_text=header_text, width=width)
+    return generate_issues_roadmap_resp(
+        issueses, header_text=header_text, width=width, primary_color=primary_color, bg_color=bg_color
+    )

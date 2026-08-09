@@ -54,6 +54,8 @@ def generate_issues_roadmap_resp(
     template_name: str = "issues_roadmap",
     header_text: str = "Roadmap",
     width: int = DEFAULT_WIDTH,
+    primary_color="#A0A0A0",
+    bg_color="transparent",
 ) -> Response:
     issues_data = [issue.model_dump() for issue in issues]
     height = estimate_height(issues_data, width)
@@ -65,4 +67,6 @@ def generate_issues_roadmap_resp(
         width=width,
         height=height,
         content_width=width - 20,
+        primary_color=primary_color,
+        bg_color=bg_color,
     )

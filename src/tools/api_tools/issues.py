@@ -27,7 +27,6 @@ async def get_gh_issues_list(username: str, repo: str, count: int = 20) -> list[
                         number=issue["number"],
                         state=issue["state"],
                         title=issue["title"],
-                        url=issue["html_url"],
                         labels=[
                             IssueLabel(
                                 name=label["name"],
