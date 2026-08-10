@@ -26,6 +26,7 @@ RUN useradd -u 1001 -m appuser
 # Copy the pre-built virtual environment and source code
 COPY --from=builder /app/.venv /app/.venv
 COPY ./src /app/src
+COPY ./static /app/static
 
 # Update PATH to automatically use the virtual environment's binaries
 ENV PATH="/app/.venv/bin:$PATH" \
