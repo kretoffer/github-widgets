@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/kretoffer/github-widgets">
-    <img src="./docs/github-widgets-by-kretoffer.svg" alt="Logo" width="180" height="180">
+    <img src="./static/github-widgets-by-kretoffer.svg" alt="Logo" width="180" height="180">
   </a>
 
   <h2 align="center">GitHub widgets by Kretoffer</h2>

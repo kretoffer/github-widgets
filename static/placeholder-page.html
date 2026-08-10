@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page on Development — Github Widgets by Kretoffer</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                         "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .container {
+            text-align: center;
+            padding: 48px 24px;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .logo--main {
+            width: 250px;
+            height: auto;
+            margin: 0 auto 48px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.35);
+            margin: 40px auto;
+            border: none;
+        }
+
+        footer {
+            padding: 48px 24px 32px;
+            width: 100%;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+
+        .footer-container p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 30px;
+        }
+
+        .copyleft {
+            display: inline-block;
+            transform: scaleX(-1);
+        }
+
+        main {
+            width: 100%;
+        }
+
+        .contacts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: min-content;
+        }
+
+        .contacts a {
+            margin: 0 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:visited {
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <a href="https://github-widgets.kretoffer.com">
+            <img
+                class="logo logo--main"
+                src="/static/github-widgets-by-kretoffer.svg"
+                alt="Github Widgets by Kretoffer"
+            >
+        </a>
+        <h1>Page now on development</h1>
+        <p>This page is currently in development.</p>
+        <p>Please check back soon.</p>
+        <p>Sorry for the inconvenience</p>
+    </main>
+        <footer>
+            <div class="divider"></div>
+            <div class="footer-container">
+                <a href="https://kretoffer.com">
+                    <img
+                        class="logo"
+                        src="/static/kretoffer-logo.svg"
+                        alt="Kretoffer"
+                        style="width: 120px;"
+                    >
+                </a>
+                <p>
+                    <a href="https://github.com/kretoffer/github-widgets/blob/main/LICENSE">
+                        <span class="copyleft">&copy;</span> Kretoffer
+                    </a>
+                </p>
+                <div class="contacts" style="width: 120px;"
+                    <a href="https://github.com/kretoffer/github-widgets">
+                        <img src="/static/github-logo.svg" alt="GitHub" width="40">
+                    </a>
+                    <a href="https://t.me/kretoffer">
+                        <img src="/static/telegram-logo.svg" alt="Telegram" width="40">
+                    </a>
+                </div>                
+            </div>
+
+        </footer>
+</body>
+</html>
