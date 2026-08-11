@@ -51,11 +51,13 @@ A roadmap card generated from repository issues, with status badges (open/closed
 | `width`         | `700`     | Card width in px, `300` – `1600`     |
 | `theme`         | `default` | Predefined widget theme              |
 | `labels`        | `true`    | Show labels on issue card            |
+| `closed`        | `false`   | Show closed issues                   |
+| `animation-duration` | `0.7` | Time in seconds (s) for **one** issue to appear, not the whole animation. Issues appear one by one; total animation time = `animation-duration × number of issues`. `0` — no animation |
 
-![Issues Roadmap](https://github-widgets.kretoffer.com/api/issues-list/kretoffer/github-widgets?count=2&header-text=My%20Roadmap&width=500&theme=default)
+![Issues Roadmap](https://github-widgets.kretoffer.com/api/issues-list/kretoffer/github-widgets?count=2&header-text=My%20Roadmap&width=500&theme=default&closed=true)
 
 ```
-![Issues Roadmap](https://github-widgets.kretoffer.com/api/issues-list/kretoffer/github-widgets?count=2&header-text=My%20Roadmap&width=500&theme=default)
+![Issues Roadmap](https://github-widgets.kretoffer.com/api/issues-list/kretoffer/github-widgets?count=2&header-text=My%20Roadmap&width=500&theme=default&closed=true)
 ```
 
 ## Self-hosting

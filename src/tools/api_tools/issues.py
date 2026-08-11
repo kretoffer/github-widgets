@@ -4,7 +4,13 @@ from config import config
 from schemas.external.gh import Issue, IssueLabel
 
 
-async def get_gh_issues_list(username: str, repo: str, count: int = 20, show_labels: bool = True) -> list[Issue]:
+async def get_gh_issues_list(
+    username: str,
+    repo: str,
+    count: int = 20,
+    show_labels: bool = True,
+    show_closed: bool = True,
+) -> list[Issue]:
     issues = []
     async with aiohttp.ClientSession() as session:
         headers = {
@@ -22,6 +28,8 @@ async def get_gh_issues_list(username: str, repo: str, count: int = 20, show_lab
             if not isinstance(result, list):
                 raise Exception(f"Unexpected GitHub API response: {result}")
             for issue in result:
+                if not show_closed and issue["state"] == "closed":
+                    continue
                 issues.append(
                     Issue(
                         number=issue["number"],

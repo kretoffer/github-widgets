@@ -13,6 +13,7 @@ _DEFAULT_COLORS = WidgetColors.model_validate(
         "success": "#3fb950",
         "warning": "#a371f7",
         "header": "#d0d0d0",
+        "widget_border": "#0000",
     }
 )
 

@@ -54,6 +54,7 @@ def generate_issues_roadmap_resp(
     template_name: str = "issues_roadmap",
     header_text: str = "Roadmap",
     style: WidgetStyleParams | None = None,
+    animation_duration: float = 0,
 ) -> Response:
     style = style or build_style()
     issues_data = [issue.model_dump() for issue in issues]
@@ -64,5 +65,6 @@ def generate_issues_roadmap_resp(
         issues=issues_data,
         header_text=header_text,
         height=height,
+        animation_duration=animation_duration,
         **style.to_template_context(),
     )

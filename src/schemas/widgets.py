@@ -15,6 +15,7 @@ class WidgetColors(BaseModel):
     success: Color
     warning: Color
     header: Color
+    widget_border: Color
 
 
 class WidgetFontSizes(BaseModel):

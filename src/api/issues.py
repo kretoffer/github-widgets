@@ -16,6 +16,10 @@ async def get_issues_list(
     count: int = 20,
     header_text: str = Query("Roadmap", alias="header-text"),
     labels: bool = Query(True),
+    closed: bool = Query(False),
+    animation_duration: float = Query(0.7, ge=0, alias="animation-duration"),
 ) -> Response:
-    issueses = await get_gh_issues_list(username, repo, count, labels)
-    return generate_issues_roadmap_resp(issueses, header_text=header_text, style=style)
+    issueses = await get_gh_issues_list(username, repo, count, labels, closed)
+    return generate_issues_roadmap_resp(
+        issueses, header_text=header_text, style=style, animation_duration=animation_duration
+    )

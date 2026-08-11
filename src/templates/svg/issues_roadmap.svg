@@ -60,8 +60,22 @@
             white-space: nowrap;
         }
       </style>
+      {% if animation_duration > 0 %}
+      <style>
+        @keyframes issue-appear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+      </style>
+      {% endif %}
       {% for issue in issues %}
-      <div class="issue">
+      <div class="issue" {% if animation_duration > 0 %}style="animation: issue-appear {{ animation_duration }}s ease both; animation-delay: {{ loop.index0 * animation_duration }}s;"{% endif %}>
           <div class="issue-header">
               <div class="status-icon {% if issue.state == 'open' %}status-open{% else %}status-closed{% endif %}">
                   {% if issue.state == "open" %}open{% else %}close{% endif %}
