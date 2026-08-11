@@ -4,7 +4,7 @@ from config import config
 from schemas.external.gh import Issue, IssueLabel
 
 
-async def get_gh_issues_list(username: str, repo: str, count: int = 20) -> list[Issue]:
+async def get_gh_issues_list(username: str, repo: str, count: int = 20, show_labels: bool = True) -> list[Issue]:
     issues = []
     async with aiohttp.ClientSession() as session:
         headers = {
@@ -33,7 +33,9 @@ async def get_gh_issues_list(username: str, repo: str, count: int = 20) -> list[
                                 color=label["color"],
                             )
                             for label in issue["labels"]
-                        ],
+                        ]
+                        if show_labels
+                        else [],
                     )
                 )
 

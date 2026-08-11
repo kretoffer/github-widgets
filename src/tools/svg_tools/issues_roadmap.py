@@ -3,6 +3,7 @@ import math
 from fastapi.responses import Response
 
 from schemas.external.gh import Issue
+from schemas.themes import build_style
 from schemas.widgets import WidgetStyleParams
 from tools.svg_tools import renderer
 
@@ -54,7 +55,7 @@ def generate_issues_roadmap_resp(
     header_text: str = "Roadmap",
     style: WidgetStyleParams | None = None,
 ) -> Response:
-    style = style or WidgetStyleParams()
+    style = style or build_style()
     issues_data = [issue.model_dump() for issue in issues]
     height = estimate_height(issues_data, style.width)
 
@@ -63,6 +64,5 @@ def generate_issues_roadmap_resp(
         issues=issues_data,
         header_text=header_text,
         height=height,
-        **style.model_dump(),
-        content_width=style.content_width,
+        **style.to_template_context(),
     )

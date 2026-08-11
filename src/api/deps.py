@@ -1,30 +1,19 @@
 from typing import Annotated
 
-from fastapi import Depends, Query
+from fastapi import Depends, HTTPException, Query
 
-from schemas.widgets import (
-    DEFAULT_BG_COLOR,
-    DEFAULT_BORDER_COLOR,
-    DEFAULT_PRIMARY_COLOR,
-    DEFAULT_WIDTH,
-    WidgetStyleParams,
-)
+from schemas.themes import DEFAULT_THEME, THEMES, build_style
+from schemas.widgets import WidgetStyleParams
 
 
 def widget_style_params(
-    width: int = Query(DEFAULT_WIDTH, ge=300, le=1600),
-    primary_color: str = Query(DEFAULT_PRIMARY_COLOR, alias="primary-color"),
-    bg_color: str = Query(DEFAULT_BG_COLOR, alias="bg-color"),
-    border_color: str = Query(DEFAULT_BORDER_COLOR, alias="border-color"),
+    theme: str = Query(DEFAULT_THEME, description="Predefined widget theme"),
+    width: int | None = Query(None, ge=300, le=1600),
 ) -> WidgetStyleParams:
-    return WidgetStyleParams.model_validate(
-        {
-            "width": width,
-            "primary-color": primary_color,
-            "bg-color": bg_color,
-            "border-color": border_color,
-        }
-    )
+    if theme not in THEMES:
+        available = ", ".join(sorted(THEMES))
+        raise HTTPException(status_code=400, detail=f"Unknown theme {theme!r}. Available: {available}")
+    return build_style(theme=theme, width=width) if width is not None else build_style(theme=theme)
 
 
 WidgetStyle = Annotated[WidgetStyleParams, Depends(widget_style_params)]

@@ -15,6 +15,7 @@ async def get_issues_list(
     style: WidgetStyle,
     count: int = 20,
     header_text: str = Query("Roadmap", alias="header-text"),
+    labels: bool = Query(True),
 ) -> Response:
-    issueses = await get_gh_issues_list(username, repo, count)
+    issueses = await get_gh_issues_list(username, repo, count, labels)
     return generate_issues_roadmap_resp(issueses, header_text=header_text, style=style)
