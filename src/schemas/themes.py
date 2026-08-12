@@ -5,7 +5,7 @@ DEFAULT_THEME = "default"
 _DEFAULT_COLORS = WidgetColors.model_validate(
     {
         "primary": "#4493f8",
-        "secondary": "#ffffff",
+        "secondary": "#a1a1a1",
         "background": "#0d1117",
         "surface": "#161b22",
         "text": "#e6edf3",

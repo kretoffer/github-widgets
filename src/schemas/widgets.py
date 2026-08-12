@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, PositiveInt
 from pydantic_extra_types import Color
 
-DEFAULT_WIDTH = 700
+DEFAULT_WIDTH = 500
 _WIDGET_SIDE_PADDING = 20
 
 

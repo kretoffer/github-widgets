@@ -14,3 +14,12 @@ class Issue(BaseModel):
     state: Literal["open", "closed", "all"]
     title: str
     labels: list[IssueLabel]
+
+
+class RepoInfo(BaseModel):
+    full_name: str
+    description: str | None
+    stars: int = 0
+    forks: int = 0
+    language: str | None
+    license: str | None

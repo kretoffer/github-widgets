@@ -48,7 +48,7 @@ A roadmap card generated from repository issues, with status badges (open/closed
 |-----------------|-----------|--------------------------------------|
 | `count`         | `20`      | Number of issues to show             |
 | `header-text`   | `Roadmap` | Card heading text                    |
-| `width`         | `700`     | Card width in px, `300` – `1600`     |
+| `width`         | `500`     | Card width in px, `300` – `1600`     |
 | `theme`         | `default` | Predefined widget theme              |
 | `labels`        | `true`    | Show labels on issue card            |
 | `closed`        | `false`   | Show closed issues                   |
