@@ -4,6 +4,10 @@
 		flex-direction: column;
 		gap: 6px;
 		padding: 20px 12px 4px 12px;
+		{% if header_text %}
+		border: 2.5px solid {{ colors.border }};
+		border-radius: 14px;
+		{% endif %}
 	}
 
 	.repo-name {

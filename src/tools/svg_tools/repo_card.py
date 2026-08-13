@@ -8,6 +8,7 @@ from schemas.widgets import WidgetStyleParams
 from tools.svg_tools import renderer
 
 _CHAR_WIDTH = 8
+_HEADER_HEIGHT = 40
 _NAME_LINE_HEIGHT = 28
 _DESC_LINE_HEIGHT = 20
 _METRICS_HEIGHT = 24
@@ -35,8 +36,9 @@ def _count_wrapped_lines(description: str | None, available_chars: int) -> int:
     return lines + 1
 
 
-def estimate_height(desc_height: int, width: int) -> int:
-    raw_height = _TOP_PADDING + _NAME_LINE_HEIGHT + desc_height + _METRICS_HEIGHT + _BOTTOM_PADDING
+def estimate_height(desc_height: int, width: int, has_header: bool = False) -> int:
+    header_height = _HEADER_HEIGHT if has_header else 0
+    raw_height = _TOP_PADDING + header_height + _NAME_LINE_HEIGHT + desc_height + _METRICS_HEIGHT + _BOTTOM_PADDING
     return math.floor(raw_height * 1.15)
 
 
@@ -51,7 +53,8 @@ def generate_repo_info_resp(
     available = _available_chars(style.width)
     shown_lines = min(description_lines, _count_wrapped_lines(repo.description, available))
     desc_height = shown_lines * _DESC_LINE_HEIGHT
-    height = estimate_height(desc_height, style.width)
+    has_header = bool(kwargs.get("header_text"))
+    height = estimate_height(desc_height, style.width, has_header)
 
     return renderer.response(
         template_name,
