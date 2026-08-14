@@ -15,6 +15,13 @@ _METRICS_HEIGHT = 24
 _TOP_PADDING = 24
 _BOTTOM_PADDING = 10
 
+_CARD_MARGIN_TOP = 10
+_CARD_BORDER = 5
+_CARD_PADDING_TOP = 20
+_CARD_PADDING_BOTTOM = 4
+_CARD_FLEX_GAP = 6
+_WIDGET_BOTTOM_PADDING = 10
+
 
 def _available_chars(width: int) -> int:
     return max(10, int((width - 60) / _CHAR_WIDTH))
@@ -47,13 +54,14 @@ def generate_repo_info_resp(
     template_name: str = "repo_info",
     style: WidgetStyleParams | None = None,
     description_lines: int = 2,
+    header_text: str | None = None,
     **kwargs,
 ) -> Response:
     style = style or build_style()
     available = _available_chars(style.width)
     shown_lines = min(description_lines, _count_wrapped_lines(repo.description, available))
     desc_height = shown_lines * _DESC_LINE_HEIGHT
-    has_header = bool(kwargs.get("header_text"))
+    has_header = bool(header_text)
     height = estimate_height(desc_height, style.width, has_header)
 
     return renderer.response(
@@ -61,6 +69,51 @@ def generate_repo_info_resp(
         **repo.model_dump(),
         description_lines=description_lines,
         height=height,
+        header_text=header_text,
         **style.to_template_context(),
         **kwargs,
+    )
+
+
+def _card_content_height(shown_lines: int) -> int:
+    desc_height = shown_lines * _DESC_LINE_HEIGHT
+    gaps = _CARD_FLEX_GAP * (2 if shown_lines else 1)
+    return (
+        _CARD_MARGIN_TOP
+        + _CARD_BORDER
+        + _CARD_PADDING_TOP
+        + _NAME_LINE_HEIGHT
+        + desc_height
+        + gaps
+        + _METRICS_HEIGHT
+        + _CARD_PADDING_BOTTOM
+    )
+
+
+def generate_most_starred_repos_resp(
+    repos: list[RepoInfo],
+    style: WidgetStyleParams | None = None,
+    description_lines: int = 2,
+    header_text: str | None = None,
+    show_forks: bool = True,
+    show_stars: bool = True,
+) -> Response:
+    style = style or build_style()
+    height = _HEADER_HEIGHT if header_text else 0
+    for repo in repos:
+        available = _available_chars(style.width)
+        shown_lines = min(description_lines, _count_wrapped_lines(repo.description, available))
+        height += _card_content_height(shown_lines)
+
+    height += _WIDGET_BOTTOM_PADDING
+
+    return renderer.response(
+        "most_starred",
+        repos=[repo.model_dump() for repo in repos],
+        description_lines=description_lines,
+        header_text=header_text,
+        height=height,
+        show_forks=show_forks,
+        show_stars=show_stars,
+        **style.to_template_context(),
     )
