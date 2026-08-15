@@ -1,0 +1,122 @@
+<style>
+	.user-header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+		padding: 4px 0 10px 0;
+	}
+
+	.user-name {
+		font-size: {{ fonts.large }}px;
+		font-weight: 600;
+		color: {{ colors.header }};
+	}
+
+	.user-handle {
+		font-size: {{ fonts.medium }}px;
+		font-weight: 400;
+		color: {{ colors.secondary }};
+	}
+
+	.columns {
+		display: flex;
+		justify-content: space-between;
+		gap: 18px;
+	}
+
+	.column {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.metric {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 5px 8px;
+		border: 2px solid {{ colors.border }};
+		border-radius: 12px;
+		background-color: {{ colors.surface }};
+		min-width: 0;
+	}
+
+	.metric-icon {
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+	}
+
+	.metric-label {
+		font-size: {{ fonts.small }}px;
+		font-weight: 400;
+		color: {{ colors.secondary }};
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		flex: 1;
+	}
+
+	.metric-value {
+		font-size: {{ fonts.medium }}px;
+		font-weight: 600;
+		color: {{ colors.text }};
+		padding-left: 8px;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+</style>
+
+{% if animation_duration > 0 %}
+<style>
+	@keyframes header-appear {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes metric-appear {
+		from {
+			opacity: 0;
+			transform: translateX(12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+</style>
+{% endif %}
+
+<div class="user-header" {% if animation_duration > 0 %}style="animation: header-appear {{ animation_duration }}s ease both;"{% endif %}>
+	<div class="user-name">{{ user_name }}</div>
+	<div class="user-handle">{{ user_handle }}</div>
+</div>
+
+{% set ns = namespace(index=0) %}
+<div class="columns">
+	{% for column in column_groups %}
+	<div class="column">
+		{% for metric in column %}
+		<div class="metric" {% if animation_duration > 0 %}style="animation: metric-appear {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+			{% if metric.icon %}
+			<svg class="metric-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+				<path fill="{{ colors.secondary }}" d="{{ metric.icon }}"/>
+			</svg>
+			{% endif %}
+			<span class="metric-label">{{ metric.label }}</span>
+			<span class="metric-value">{{ metric.value }}</span>
+		</div>
+		{% set ns.index = ns.index + 1 %}
+		{% endfor %}
+	</div>
+	{% endfor %}
+</div>

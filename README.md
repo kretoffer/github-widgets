@@ -60,6 +60,48 @@ A roadmap card generated from repository issues, with status badges (open/closed
 ![Issues Roadmap](https://github-widgets.kretoffer.com/api/issues-list/kretoffer/github-widgets?count=2&header-text=My%20Roadmap&width=500&theme=default&closed=true)
 ```
 
+### User Stats
+
+A stats card for any GitHub user: stars, commits, PRs, issues, followers and more, split into responsive columns.
+
+![User Stats](https://github-widgets.kretoffer.com/api/user-stats/kretoffer)
+
+```
+![User Stats](https://github-widgets.kretoffer.com/api/user-stats/{GITHUB_USERNAME})
+```
+
+#### Parameters
+
+| Parameter      | Default | Description                                      |
+|-----------------|---------|--------------------------------------------------|
+| `columns`      | `1`    | Number of columns, `1` – `4`; auto picks `ceil(sqrt(count))` |
+| `width`        | `500`   | Card width in px, `300` – `1600`                 |
+| `theme`        | `default` | Predefined widget theme                        |
+| `animation-duration` | `0.7` | Time in seconds (s) for one metric to appear. `0` — no animation |
+
+Each metric can be toggled with a `show-{key}` parameter, `true` by default:
+
+| Key           | Query param           | Metric                  |
+|---------------|-----------------------|-------------------------|
+| `stars`       | `show-stars`          | Total stars             |
+| `commits`     | `show-commits`        | Total commits           |
+| `commits-year`| `show-commits-year`   | Commits this year       |
+| `prs`         | `show-prs`            | Total pull requests     |
+| `issues`      | `show-issues`         | Total issues            |
+| `repos`       | `show-repos`          | Total repositories      |
+| `contributed` | `show-contributed`    | Repositories contributed to |
+| `followers`   | `show-followers`      | Followers               |
+| `following`   | `show-following`      | Following               |
+| `forks`       | `show-forks`          | Total forks             |
+| `starred`     | `show-starred`        | Repos starred           |
+| `merged-prs`  | `show-merged-prs`     | Merged pull requests    |
+
+Example hiding two metrics:
+
+```
+![User Stats](https://github-widgets.kretoffer.com/api/user-stats/kretoffer?columns=3&show-starred=false&show-merged-prs=false)
+```
+
 ## Self-hosting
 
 Run your own instance with Docker:

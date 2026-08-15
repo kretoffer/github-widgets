@@ -23,3 +23,16 @@ class RepoInfo(BaseModel):
     forks: int = 0
     language: str | None
     license: str | None
+
+
+class Metric(BaseModel):
+    key: str
+    label: str
+    value: str
+    icon: str
+
+
+class UserStats(BaseModel):
+    name: str
+    handle: str
+    metrics: list[Metric]
