@@ -1,0 +1,104 @@
+<style>
+	.skills {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: {{ gap }}px;
+	}
+
+	.section {
+		flex-basis: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding-top: 2px;
+	}
+
+	.section-title {
+		font-size: {{ fonts.big }}px;
+		font-weight: 600;
+		color: {{ colors.text }};
+	}
+
+	.section-divider {
+		height: 1px;
+		background-color: {{ colors.border }};
+	}
+
+	.tile {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		padding: 12px 8px;
+		border: 2px solid {{ colors.border }};
+		border-radius: 12px;
+		background-color: {{ colors.surface }};
+		width: {{ cell }}px;
+		overflow: hidden;
+	}
+
+	.tile-icon {
+		width: {{ icon_size }}px;
+		height: {{ icon_size }}px;
+	}
+
+	.tile-caption {
+		font-size: {{ fonts.small }}px;
+		color: {{ colors.secondary }};
+		text-align: center;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		max-width: 100%;
+	}
+
+	.tile-missing {
+		font-size: {{ fonts.large }}px;
+		color: {{ colors.secondary }};
+		line-height: {{ icon_size }}px;
+	}
+</style>
+
+{% if animation_duration > 0 %}
+<style>
+	@keyframes appear {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>
+{% endif %}
+
+{% set ns = namespace(index=0) %}
+<div class="skills">
+	{% for element in elements %}
+	{% if element.type == "section" %}
+	<div class="section" {% if animation_duration > 0 %}style="animation: appear {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+		<div class="section-title">{{ element.title }}</div>
+		<div class="section-divider"></div>
+	</div>
+	{% set ns.index = ns.index + 1 %}
+	{% else %}
+	<div class="tile" {% if animation_duration > 0 %}style="animation: appear {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+		{% if element.missing %}
+		<div class="tile-missing">?</div>
+		{% else %}
+		<svg class="tile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<path fill="{{ element.icon_color }}" d="{{ element.path }}"/>
+		</svg>
+		{% endif %}
+		{% if show_titles %}
+		<div class="tile-caption">{{ element.title }}</div>
+		{% endif %}
+	</div>
+	{% set ns.index = ns.index + 1 %}
+	{% endif %}
+	{% endfor %}
+</div>

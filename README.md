@@ -102,6 +102,34 @@ Example hiding two metrics:
 ![User Stats](https://github-widgets.kretoffer.com/api/user-stats/kretoffer?columns=3&show-starred=false&show-merged-prs=false)
 ```
 
+### Tech Stack
+
+A skill table card with Simple Icons logos, grouped into sections, for your tech stack.
+
+![Tech Stack](https://github-widgets.kretoffer.com/api/tech-stack?skills=--Programming%20Languages--%7Cpython%7CFastAPI:fastapi%7C--Databases--%7Cpostgresql&header-text=My%20Stack)
+
+```
+![Tech Stack](https://github-widgets.kretoffer.com/api/tech-stack?skills=--Programming%20Languages--%7Cpython%7CFastAPI:fastapi%7C--Databases--%7Cpostgresql&header-text=My%20Stack)
+```
+
+The `skills` parameter is a `|`-separated list of items. A token wrapped in `--` on both sides (e.g. `--Programming Languages--`) becomes a section header. A plain slug (e.g. `python`) renders the matching Simple Icons logo with a pretty title. Use `Title:slug` (e.g. `FastAPI:fastapi`) to set a custom title for a slug.
+
+#### Parameters
+
+| Parameter       | Default | Description                                      |
+|-----------------|---------|--------------------------------------------------|
+| `skills`        | —       | Required. `|`-separated list of slugs and `--Section--` headers |
+| `header-text`   | —       | Card heading text                                |
+| `columns`       | `4`     | Number of columns, `1` – `10`                    |
+| `show-titles`   | `true`  | Show captions under icons                        |
+| `icon-size`     | `48`    | Icon size in px, `16` – `128`                    |
+| `use-original-colors` | `true` | Use brand colors from Simple Icons; `false` falls back to the theme text color |
+| `icon-color`    | —       | Override icon color for all tiles (e.g. `#e6edf3`) |
+| `gap`           | `16`    | Gap between tiles in px, `0` – `64`              |
+| `width`         | `500`   | Card width in px, `300` – `1600`                 |
+| `theme`         | `default` | Predefined widget theme                        |
+| `animation-duration` | `0.6` | Time in seconds (s) for one element to appear. `0` — no animation |
+
 ## Self-hosting
 
 Run your own instance with Docker:
