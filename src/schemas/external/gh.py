@@ -32,6 +32,12 @@ class Metric(BaseModel):
     icon: str
 
 
+class LanguageShare(BaseModel):
+    name: str
+    share: float = 0.0
+    count: int = 0
+
+
 class UserStats(BaseModel):
     name: str
     handle: str
