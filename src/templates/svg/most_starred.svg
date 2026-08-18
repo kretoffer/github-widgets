@@ -97,7 +97,7 @@
 		{% endif %}
 		{% if repo.language %}
 		<span class="metric">
-			<span style="display: inline-block; width: 16px; height: 16px; border-radius: 50%; background-color: {{ repo.language|text2color }}; flex-shrink: 0; border: 2px solid {{ colors.border }};"></span>
+			<span style="display: inline-block; width: 16px; height: 16px; border-radius: 4px; background-color: {{ repo.language|text2color }}; flex-shrink: 0; border: 2px solid {{ colors.border }};"></span>
 			{{ repo.language }}
 		</span>
 		{% endif %}

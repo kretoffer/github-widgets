@@ -1,0 +1,87 @@
+<style>
+	.lang-list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding-top: 8px;
+	}
+
+	.lang-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: {{ fonts.small }}px;
+	}
+
+	.lang-dot {
+		width: 12px;
+		height: 12px;
+		border-radius: 4px;
+		flex-shrink: 0;
+		border: 2px solid {{ colors.border }};
+	}
+
+	.lang-name {
+		color: {{ colors.text }};
+		font-weight: 500;
+		min-width: 70px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.lang-bar {
+		flex: 1;
+		height: 8px;
+		border-radius: 4px;
+		background-color: {{ colors.surface }};
+		border: 1px solid {{ colors.border }};
+		overflow: hidden;
+	}
+
+	.lang-bar-fill {
+		height: 100%;
+		border-radius: 4px;
+		background-color: {{ colors.primary }};
+	}
+
+	.lang-percent {
+		color: {{ colors.secondary }};
+		font-weight: 600;
+		min-width: 48px;
+		text-align: right;
+		white-space: nowrap;
+	}
+</style>
+
+{% if animation_duration > 0 %}
+<style>
+	@keyframes lang-appear {
+		from {
+			opacity: 0;
+			transform: translateX(12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+</style>
+{% endif %}
+
+{% set ns = namespace(index=0) %}
+<div class="lang-list">
+	{% for lang in languages %}
+	<div class="lang-row" {% if animation_duration > 0 %}style="animation: lang-appear {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+		<span class="lang-dot" style="background-color: {{ lang.color }};"></span>
+		<span class="lang-name">{{ lang.name }}</span>
+		<div class="lang-bar">
+			<div class="lang-bar-fill" style="width: {{ lang.share }}%;"></div>
+		</div>
+		{% if show_percent %}
+		<span class="lang-percent">{{ lang.share }}%</span>
+		{% endif %}
+	</div>
+	{% set ns.index = ns.index + 1 %}
+	{% endfor %}
+</div>

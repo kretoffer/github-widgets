@@ -21,7 +21,7 @@ class SVGRenderer:
         )
         self.env.filters["escape"] = lambda x: html.escape(str(x))
         self.env.filters["color_hex"] = self._color_to_hex
-        self.env.filters["text2color"] = self._text_to_color
+        self.env.filters["text2color"] = self.text_to_color
 
     @staticmethod
     def _color_to_hex(color: Color) -> str:
@@ -29,7 +29,7 @@ class SVGRenderer:
         return color.as_hex()
 
     @staticmethod
-    def _text_to_color(text: str) -> str:
+    def text_to_color(text: str) -> str:
         hash_object = hashlib.sha256(text.encode("utf-8"))
         hex_code = hash_object.hexdigest()[:6]
         return f"#{hex_code.upper()}"
