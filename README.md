@@ -102,6 +102,27 @@ Example hiding two metrics:
 ![User Stats](https://github-widgets.kretoffer.com/api/user-stats/kretoffer?columns=3&show-starred=false&show-merged-prs=false)
 ```
 
+### Contribution Streak
+
+A GitHub contribution streak card showing total contributions, current streak with a progress ring, and longest streak.
+
+![Contribution Streak](https://github-widgets.kretoffer.com/api/contribution-streak/kretoffer)
+
+```
+![Contribution Streak](https://github-widgets.kretoffer.com/api/contribution-streak/{GITHUB_USERNAME})
+```
+
+#### Parameters
+
+| Parameter         | Default | Description                                         |
+|-------------------|---------|-----------------------------------------------------|
+| `header-text`     | —       | Card heading text                                   |
+| `animation-duration` | `0.6`  | Time in seconds (s) for one element to appear. `0` — no animation |
+| `width`           | `500`   | Card width in px, `300` – `1600`                    |
+| `theme`           | `default` | Predefined widget theme                           |
+
+The widget computes streaks from the user's full contribution history (up to 25 years) via GitHub GraphQL API. Data is cached for 1 hour.
+
 ### Tech Stack
 
 A skill table card with Simple Icons logos, grouped into sections, for your tech stack.

@@ -42,3 +42,13 @@ class UserStats(BaseModel):
     name: str
     handle: str
     metrics: list[Metric]
+
+
+class StreakStats(BaseModel):
+    total_contributions: int
+    total_range: str
+    current_streak: int
+    current_streak_range: str
+    longest_streak: int
+    longest_streak_range: str
+    current_progress: float

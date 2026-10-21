@@ -1,0 +1,152 @@
+<style>
+	.streak-boxes {
+		display: flex;
+		justify-content: space-between;
+		gap: 10px;
+		padding-top: 8px;
+	}
+
+	.streak-box {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+		height: 150px;
+		background-color: {{ colors.surface }};
+		border: 2px solid {{ colors.border }};
+		border-radius: 12px;
+		padding: 10px;
+		overflow: hidden;
+	}
+
+	.streak-value {
+		font-size: 30px;
+		font-weight: 700;
+		color: {{ colors.warning }};
+		white-space: nowrap;
+	}
+
+	.streak-value-center {
+		font-size: 30px;
+		font-weight: 700;
+		white-space: nowrap;
+		color: {{ colors.warning }};
+	}
+
+	.streak-label {
+		font-size: {{ fonts.small }}px;
+		font-weight: 500;
+		color: {{ colors.text }};
+		text-align: center;
+		white-space: nowrap;
+	}
+
+	.streak-range {
+		font-size: {{ fonts.tiny }}px;
+		color: {{ colors.secondary }};
+		text-align: center;
+		white-space: nowrap;
+	}
+</style>
+
+{% if animation_duration > 0 %}
+<style>
+	@keyframes streak-slide-up {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes streak-fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes streak-flame-glow {
+		0%,
+		100% {
+			opacity: 0.75;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes streak-ring-draw {
+		from {
+			stroke-dashoffset: {{ '%.2f' % ring_circumference }};
+		}
+		to {
+			stroke-dashoffset: {{ '%.2f' % ring_dashoffset }};
+		}
+	}
+</style>
+{% endif %}
+
+{% set ns = namespace(index=0) %}
+<div class="streak-boxes">
+
+	<div class="streak-box" {% if animation_duration > 0 %}style="animation: streak-slide-up {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+		<div class="streak-value">{{ total_contributions }}</div>
+		<div class="streak-label">Total Contributions</div>
+		<div class="streak-range">{{ total_range }}</div>
+	</div>
+	{% set ns.index = ns.index + 1 %}
+
+	<div class="streak-box" {% if animation_duration > 0 %}style="animation: streak-slide-up {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+		<svg width="{{ ring_radius * 2 + 10 }}" height="125" xmlns="http://www.w3.org/2000/svg">
+			<g {% if animation_duration > 0 %}style="animation: streak-flame-glow {{ animation_duration * 2.5 }}s ease-in-out infinite; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+				<path
+					transform="translate({{ ring_radius + 5 - 12 }}, 6) scale(1.4)"
+					d="M9 0C7.77 2.84 5.94 4.55 4.96 5.72C3.9 7.09 3 8.59 3 10.5C3 14.09 5.69 17 9 17C12.31 17 15 14.09 15 10.5C15 7 12 3.5 9 0Z"
+					fill="{{ colors.warning }}"
+				></path>
+				<path
+					transform="translate({{ ring_radius + 5 - 12 }}, 6) scale(1.4)"
+					d="M9 15C7.07 15 5.5 13.43 5.5 11.5C5.5 10.15 6.37 9.09 7.25 8.15L9 6.25L10.75 8.15C11.63 9.09 12.5 10.15 12.5 11.5C12.5 13.43 10.93 15 9 15Z"
+					fill="{{ colors.warning }}"
+					opacity="0.7"
+				></path>
+			</g>
+			<circle cx="{{ ring_radius + 5 }}" cy="{{ ring_radius * 2 + 4 }}" r="{{ ring_radius }}" fill="none" stroke="{{ colors.border }}" stroke-width="5"></circle>
+			<circle
+				cx="{{ ring_radius + 5 }}"
+				cy="{{ ring_radius * 2 + 4 }}"
+				r="{{ ring_radius }}"
+				fill="none"
+				stroke="{{ colors.success }}"
+				stroke-width="5"
+				stroke-linecap="round"
+				stroke-dasharray="{{ '%.2f' % ring_circumference }}"
+				{% if animation_duration > 0 %}
+				style="animation: streak-ring-draw {{ animation_duration * 2 }}s ease both; animation-delay: {{ (ns.index + 1) * animation_duration }}s;"
+				{% else %}
+				stroke-dashoffset="{{ '%.2f' % ring_dashoffset }}"
+				{% endif %}
+			></circle>
+			<text x="{{ ring_radius + 5 }}" y="{{ ring_radius * 2 + 11 }}" text-anchor="middle" fill="{{ colors.warning }}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700">{{ current_streak }}</text>
+		</svg>
+		<div class="streak-label">Current Streak</div>
+		<div class="streak-range">{{ current_streak_range }}</div>
+	</div>
+	{% set ns.index = ns.index + 1 %}
+
+	<div class="streak-box" {% if animation_duration > 0 %}style="animation: streak-slide-up {{ animation_duration }}s ease both; animation-delay: {{ ns.index * animation_duration }}s;"{% endif %}>
+		<div class="streak-value">{{ longest_streak }}</div>
+		<div class="streak-label">Longest Streak</div>
+		<div class="streak-range">{{ longest_streak_range }}</div>
+	</div>
+
+</div>
